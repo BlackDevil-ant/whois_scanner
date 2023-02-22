@@ -1,0 +1,5 @@
+whois
+request
+subdomain_scanner
+colorama
+python-whois
