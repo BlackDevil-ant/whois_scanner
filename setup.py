@@ -10,6 +10,9 @@ from colorama import init, Fore, Style
 init()
 
 
+def print_scanning_info():
+    print(Fore.YELLOW + "Scanning in progress...")
+
 def get_ip_address(domain):
     try:
         ip_address = socket.gethostbyname(domain)
@@ -29,10 +32,11 @@ def get_ip_address(domain):
 
 
 def run_nikto(domain):
+    print_scanning_info()
     try:
         output = subprocess.check_output(
             ['nikto', '-h', domain], stderr=subprocess.STDOUT)
-        print(Fore.GREEN + "Nikto Output:")
+        print(Fore.BLUE + "Nikto Output:")
         print(output.decode('utf-8'))
         print("")
     except subprocess.CalledProcessError as e:
@@ -43,7 +47,7 @@ def scan_domain(domain):
     try:
         ip_address = socket.gethostbyname(domain)
         w = whois.whois(domain)
-        print(Fore.GREEN + "Domain Info:")
+        print(Fore.RED + "Domain Info:")
         print(f"\tDomain Name: {domain}")
         print(f"\tIP Address: {ip_address}")
         print(f"\tRegistrar: {w.registrar}")
